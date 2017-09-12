@@ -4,19 +4,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.algaworks.brewer.model.Cerveja;
+
 @Controller
 public class CervejasController {
-	
+
 	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.GET)
 	public String novo() {
 		return "cerveja/CadastroCerveja";
 	}
 
 	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
-	public void cadastrar() {
-		
-		System.out.println("log.cosole: cadastro de cerveja");
-		
+	public String cadastrar(Cerveja cerveja) {
+		System.out.println(">>>>> log.console [CervejasController] : CadastroCerveja.html : [" + cerveja.getSku() + "][" + cerveja.getNome() + "]");
+		return "cerveja/CadastroCerveja";
+
 	}
-	
+
 }
