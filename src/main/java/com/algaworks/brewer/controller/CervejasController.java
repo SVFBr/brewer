@@ -23,12 +23,12 @@ public class CervejasController {
 	public String cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
 
 		if (result.hasErrors()) {
-			model.addAttribute("mensagem", "Erro no formulário");
+			model.addAttribute("mensagem", "Validação NOK");
 			System.out.println("LOG : Validação NOK");
 			return "cerveja/CadastroCerveja";
 		} else {
-			attributes.addFlashAttribute("mensagem", "Erro no formulário");
-			System.out.println(">>>>> LOG " + cerveja.getSku() + " " + cerveja.getNome());
+			attributes.addFlashAttribute("mensagem", "Cerveja cadastrada com sucesso");
+			System.out.println("LOG " + cerveja.getSku() + " " + cerveja.getNome());
 			return "redirect:/cervejas/novo";
 		}
 
