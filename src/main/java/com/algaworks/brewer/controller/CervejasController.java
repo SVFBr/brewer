@@ -14,24 +14,21 @@ import com.algaworks.brewer.model.Cerveja;
 @Controller
 public class CervejasController {
 
-	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.GET)
-	public String novo() {
+	@RequestMapping("/cervejas/novo")
+	public String novo(Cerveja cerveja) {
 		return "cerveja/CadastroCerveja";
 	}
 
 	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
 	public String cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
-
 		if (result.hasErrors()) {
-			model.addAttribute("mensagem", "Validação NOK");
-			System.out.println("LOG : Validação NOK");
-			return "cerveja/CadastroCerveja";
-		} else {
-			attributes.addFlashAttribute("mensagem", "Cerveja cadastrada com sucesso");
-			System.out.println("LOG " + cerveja.getSku() + " " + cerveja.getNome());
-			return "redirect:/cervejas/novo";
+			return novo(cerveja);
 		}
 
+		// Salvar no banco de dados...
+		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso!");
+		System.out.println(">>> sku: " + cerveja.getSku());
+		return "redirect:/cervejas/novo";
 	}
 
 }
